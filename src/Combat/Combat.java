@@ -5,6 +5,8 @@ import Characters.Enemy;
 import Utils.Dice;
 import java.util.Scanner;
 
+
+
 public class Combat {
     public static void startCombat(PlayerCharacter player, Enemy enemy) {
         Scanner scanner = new Scanner(System.in);

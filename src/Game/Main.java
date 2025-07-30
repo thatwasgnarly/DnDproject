@@ -15,39 +15,56 @@ public class Main {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
-        // === Character Creation ===
-        System.out.print("Enter your character's name: ");
-        String name = input.nextLine();
+        boolean playing = true;
+        while (playing) {
 
-        System.out.println("Rolling your stats...");
-        int hp = 40 + Dice.roll(10);
-        int str = Dice.rollStat();
-        int dex = Dice.rollStat();
-        int intel = Dice.rollStat();
 
-        Stats rolledStats = new Stats(hp, str, dex, intel);
-        rolledStats.printStats();
+            // === Character Creation ===
+            System.out.print("Enter your character's name: ");
+            String name = input.nextLine();
 
-        System.out.println("Choose a trait:\n1. Tough\n2. Clever\n3. Fast");
-        int traitChoice = input.nextInt();
-        input.nextLine(); // flush newline
+            System.out.println("Rolling your stats...");
+            int hp = 40 + Dice.roll(10);
+            int str = Dice.rollStat();
+            int dex = Dice.rollStat();
+            int intel = Dice.rollStat();
 
-        Trait trait = Trait.getTraitByChoice(traitChoice);
-        PlayerCharacter player = new PlayerCharacter(name, rolledStats, trait);
+            Stats rolledStats = new Stats(hp, str, dex, intel);
+            rolledStats.printStats();
 
-        System.out.println("Character created!");
-        player.printCharacterInfo();
+            System.out.println("Choose a trait:\n1. Tough\n2. Clever\n3. Fast");
+            int traitChoice = input.nextInt();
+            input.nextLine(); // flush newline
 
-        // === Inventory Setup ===
-        Bag bag = new Bag();
-        Item potion = new Item("Healing Potion", "Restores 10 HP", "potion", 10);
-        bag.addItem(potion);
-        player.setBag(bag);
+            Trait trait = Trait.getTraitByChoice(traitChoice);
+            PlayerCharacter player = new PlayerCharacter(name, rolledStats, trait);
 
-        // === Enemy ===
-        Enemy goblin = new Enemy("Goblin", 35, 4, 2);
+            System.out.println("Character created!");
+            player.printCharacterInfo();
 
-        // === Combat Start ===
-        Combat.startCombat(player, goblin);
+            // === Inventory Setup ===
+            Bag bag = new Bag();
+            Item potion = new Item("Healing Potion", "Restores 10 HP", "potion", 10);
+            bag.addItem(potion);
+            player.setBag(bag);
+
+            // === Enemy ===
+            Enemy[] enemies = {
+                new Enemy("Goblin", 35, 5, 8),
+                new Enemy("Orc", 55, 15, 5),
+new Enemy("Skeleton", 30, 4, 4)
+            };
+            Enemy enemy = enemies[Dice.roll(enemies.length) -1];
+            // === Combat Start ===
+            Combat.startCombat(player, enemy);
+
+            System.out.println("\nDo you want to play again? (yes/no)");
+            String again = input.nextLine().trim().toLowerCase();
+            if(!again.equals("yes")){
+                playing = false;
+                System.out.println("Thanks for playing!");
+            }
+
+        }
     }
 }
