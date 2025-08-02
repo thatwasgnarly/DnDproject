@@ -51,7 +51,7 @@ public class PlayerCharacter {
     public void printCharacterInfo() {
         System.out.println("Character created!");
         System.out.println("Name: " + name);
-        System.out.println("Trait: " + trait.getName() + " - " + trait.getDescription());
+        System.out.println("Class: " + trait.getName() + " - " + trait.getDescription());
         stats.printStats();
     }
 }

@@ -32,7 +32,7 @@ public class Main {
             Stats rolledStats = new Stats(hp, str, dex, intel);
             rolledStats.printStats();
 
-            System.out.println("Choose a trait:\n1. Tough\n2. Clever\n3. Fast");
+            System.out.println("Choose a class:\n1. Warrior\n2. Wizard\n3. Rogue");
             int traitChoice = input.nextInt();
             input.nextLine(); // flush newline
 
@@ -52,9 +52,9 @@ public class Main {
             Enemy[] enemies = {
                 new Enemy("Goblin", 35, 5, 8),
                 new Enemy("Orc", 55, 15, 5),
-new Enemy("Skeleton", 30, 4, 4)
+                new Enemy("Skeleton", 30, 4, 4)
             };
-            Enemy enemy = enemies[Dice.roll(enemies.length) -1];
+            Enemy enemy = enemies[Dice.roll(enemies.length) -1]; //Random enemy each time
             // === Combat Start ===
             Combat.startCombat(player, enemy);
 
@@ -64,7 +64,7 @@ new Enemy("Skeleton", 30, 4, 4)
                 playing = false;
                 System.out.println("Thanks for playing!");
             }
-
         }
+
     }
 }
